@@ -23,15 +23,32 @@
     };
     request.send(vars);
 }
-        .mainimage{
+       
+    </script>
+<style>
+      /* Vector */
+.img{
+position: absolute;
+left: 42.45%;
+right: 39.74%;
+top: 3.48%;
+bottom: 73.97%;
+
+background: #2EC4B6;
+transform: matrix(0.99, -0.11, 0.11, 0.99, 0, 0);
+}
+
+.first{
+    margin:10px 40px 10px 40px;
+}
+     .mainimage{
             position: absolute;
             width: 660px;
             height: 521px;
             left: 99px;
             top: 205px;
         }
-    </script>
-
+  </style>
     <body>
         <!-- Image and text -->
 <nav class="navbar navbar-dark bg-dark">
@@ -42,6 +59,31 @@
   </nav>
         <img class="mainimage" src="frame.png">
 
-
+<br><br>
+    <div class="first">
+    <h4>Enter details</h4>
+    <form>
+    <div class="form-row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="First name">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Last name">
+      </div>
+    </div>
+    <br><br>
+   
+    <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Card number">
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="CVV">
+        </div>
+      </div>
+      <br><br>
+      <button type="submit" class="btn btn-primary">Sign in</button> 
+  </form>
+</div>
     </body>
 </html>
