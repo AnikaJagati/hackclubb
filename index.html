@@ -2,10 +2,16 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <style>
         body {font-family: Arial, Helvetica, sans-serif;}
         * {box-sizing: border-box;
-        font-size: 30px}
+            font-size: 30px}
 
         /* Button used to open the contact form - fixed at the bottom of the page */
         .sidebar {
@@ -57,7 +63,8 @@
         /* The popup form - hidden by default */
         .form-popup {
             display: none;
-            position: center;
+            position: fixed;
+            float: right;
             bottom: 0;
             right: 15px;
             border: 3px solid #f1f1f1;
@@ -66,13 +73,15 @@
 
         /* Add styles to the form container */
         .form-container {
-            max-width: 300px;
+            max-width: 400px;
             padding: 10px;
-            background-color: white;
+            background-color: lightgoldenrodyellow;
+            border-radius: 10px;
+            border: firebrick 10px solid;
         }
 
         /* Full-width input fields */
-        .form-container input[type=text], .form-container input[type=password] {
+        .form-container input[type=text],input[type=password] {
             width: 100%;
             padding: 15px;
             margin: 5px 0 22px 0;
@@ -81,7 +90,7 @@
         }
 
         /* When the inputs get focus, do something */
-        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+        .form-container input[type=text]:focus, input[type=password]:focus {
             background-color: #ddd;
             outline: none;
         }
@@ -94,7 +103,6 @@
             border: none;
             cursor: pointer;
             width: 100%;
-            margin-bottom:10px;
             opacity: 0.8;
         }
 
@@ -107,17 +115,11 @@
         .form-container .btn:hover, .open-button:hover {
             opacity: 1;
         }
-        .content {
-            column-count: 1;
-            column-width: 1000px;
-        }
-        .form-container-c{
-
-        }
         .topnav {
             overflow: hidden;
             background-color: #333;
             margin-bottom: 20px;
+            border: black;
         }
 
         .topnav a {
@@ -139,29 +141,21 @@
             color: white;
         }
         #one{
-    background-color: #BED1F9;
+            background-color: #BED1F9;
+            text-align: center;
+        }
+        #two{
 
-    padding: 20px 50px 20px 50px;
-    text-align: center;
-}
-#two{
-    
-    text-align: center;
-    padding: 20px 50px 20px 50px;
-}
+            text-align: center;
+        }
     </style>
 </head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 <body>
-    <div class="topnav">
+<div class="topnav">
     <a class="active" href="#home">Home</a>
     <a href="#news">Services</a>
     <a href="#contact">Account</a>
+    <button class="btn btn-primary open-button" onclick="openForm()">Vpay</button>
     <a href="#about">About</a>
 </div>
 <div class="sidebar">
@@ -173,103 +167,98 @@
     <a href="#tools">Tools for stack</a>
     <a href="#about">Why VITC?</a>
 </div>
-
-<button class="open-button" onclick="openForm()">VPay</button><br>
 <div class="content">
-<p>
-    <a id="Pay">Payment Infrastructure</a>
     <div class="row">
-    <div id="two" class="col-lg-12">
-        <h4>  Payments infrastructure for the internet</h4>
-        <i class="fas fa-key" style="font-size:60px;"></i>
-        <h6>
-          
-            Millions of businesses of all sizes—from startups to large enterprises—use VITC’s software and APIs to accept payments, send payouts, and manage their businesses online.
-            
-        </h6>
-    </div><br><br>
-    <a id="UP">Unified Platform</a>
-    <div id="one" class="col-lg-12">
-          <h4>Unified platform</h4>
-          <i class="fas fa-check-circle" style="font-size:60px;"></i>
-          <h6>
-            A fully integrated suite of payments products.
-            We bring together everything that’s required to build websites and apps that accept payments and send payouts globally. VITC’s products power payments for online and in-person retailers subscriptions businesses software platforms and marketplaces , and everything in between.
-            We also help companies beat fraud send invoices issue virtual and physical cards get financing manage business spend , and much more.
-          </h6>
-      </div><br><br>
-    <a id="DD">Design for Developers</a>
-   <div id="two" class="col-lg-12">
-       <h4>Close to the metal</h4> 
-       <i class="fas fa-thumbs-up" style="font-size:60px;"></i>  
-       <h6>
-        From direct integrations  with card networks and banks to checkout flows in the browser, we operate on and optimize at every level of the financial stack.
-        
-        Fastest-improving platform
-        We release hundreds of features and improvements each year to help you stay ahead of industry shifts. (On average, we deploy our production API 16x per day.) 
-         
-        </h6>
-    </div><br><br>
-    <a id="tools">TOOls for every stack</a>
-    <div class="row">
-      <div id="one" class="col-lg-12">
-          <h4>Battle-test reliabitlity</h4>
-          <i class="fas fa-bullseye" style="font-size:60px;"></i>
-          <h6>
-            Our systems operate with 99.9%+ uptime and are highly scalable and redundant. VITC is certified to the highest compliance standards.
-            Intelligent optimizations
-            Our machine learning models train on billions of data points and help increase revenue across conversion, fraud, revenue recovery, and more.
-         </h6>            
-      </div><br><br>
         <div id="two" class="col-lg-12">
-       <h4>Global scale</h4> 
-       <i class="fas fa-globe" style="font-size:60px;"></i>  
-       <h6>
-        The backbone for internet business
-        For ambitious companies around the world, VITC makes moving money as simple, borderless, and programmable as the rest of the internet. Our teams are based in dozens of offices around the world and we process hundreds of billions of dollars each year for startups to large enterprises
-        250M+API requests per day, peaking at 13,000 requests a second.
-        90% of U.S. adults have bought from businesses using VITC.
-        50+ currencies and payment methods supported.
-        95+countries with local acquiring, optimizing acceptance rates.
-        </h6>
-    </div><br><br>
-    <a id="about">Why VITC?</a>
-    <div class="row">
-      <div id="one" class="col-lg-12">
-          <h4>Fastest-improving platform</h4>
-          <i class="fas fa-fighter-jet" style="font-size:60px;"></i>
-          <h6>
-         
-We release hundreds of features and improvements each year to help you stay ahead of industry shifts. (On average, we deploy our production API 16x per day.) 
+            <a id="Pay"></a>
+            <h4>  Payments infrastructure for the internet</h4>
+            <i class="fas fa-key" style="font-size:60px;"></i>
+            <h6>
+                Millions of businesses of all sizes—from startups to large enterprises—use VITC’s software and APIs to accept payments, send payouts, and manage their businesses online.
 
-         </h6>            
-      </div><br><br>
+            </h6>
+        </div><br><br>
+        <div id="one" class="col-lg-12">
+            <a id="UP"></a>
+            <h4>Unified platform</h4>
+            <i class="fas fa-check-circle" style="font-size:60px;"></i>
+            <h6>
+                A fully integrated suite of payments products.
+                We bring together everything that’s required to build websites and apps that accept payments and send payouts globally. VITC’s products power payments for online and in-person retailers subscriptions businesses software platforms and marketplaces , and everything in between.
+                We also help companies beat fraud send invoices issue virtual and physical cards get financing manage business spend , and much more.
+            </h6>
+        </div>
+        <div id="two" class="col-lg-12">
+            <a id="DD">Design for Developers</a>
+            <h4>Close to the metal</h4>
+            <i class="fas fa-thumbs-up" style="font-size:60px;"></i>
+            <h6>
+                From direct integrations  with card networks and banks to checkout flows in the browser, we operate on and optimize at every level of the financial stack.
+
+                Fastest-improving platform
+                We release hundreds of features and improvements each year to help you stay ahead of industry shifts. (On average, we deploy our production API 16x per day.)
+
+            </h6>
+        </div>
+    </div>
+    <div class="row">
+        <div id="one" class="col-lg-12">
+            <a id="tools"></a>
+            <h4>Battle-test reliabitlity</h4>
+            <i class="fas fa-bullseye" style="font-size:60px;"></i>
+            <h6>
+                Our systems operate with 99.9%+ uptime and are highly scalable and redundant. VITC is certified to the highest compliance standards.
+                Intelligent optimizations
+                Our machine learning models train on billions of data points and help increase revenue across conversion, fraud, revenue recovery, and more.
+            </h6>
+        </div>
+        <div id="two" class="col-lg-12">
+            <h4>Global scale</h4>
+            <a id="about"></a>
+            <i class="fas fa-globe" style="font-size:60px;"></i>
+            <h6>
+                The backbone for internet business
+                For ambitious companies around the world, VITC makes moving money as simple, borderless, and programmable as the rest of the internet. Our teams are based in dozens of offices around the world and we process hundreds of billions of dollars each year for startups to large enterprises
+                250M+API requests per day, peaking at 13,000 requests a second.
+                90% of U.S. adults have bought from businesses using VITC.
+                50+ currencies and payment methods supported.
+                95+countries with local acquiring, optimizing acceptance rates.
+            </h6>
+        </div>
+    </div>
+    <div class="row">
+        <div id="one" class="col-lg-12">
+            <h4>Fastest-improving platform</h4>
+            <i class="fas fa-fighter-jet" style="font-size:60px;"></i>
+            <h6>
+                We release hundreds of features and improvements each year to help you stay ahead of industry shifts. (On average, we deploy our production API 16x per day.)
+            </h6>
+        </div>
+
+    </div>
 </div>
-<nav class="navbar navbar-light bg-light">
-    <img src="image 1.png" width="80" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-    <a class="navbar-brand" href="#">
-    </a>
-</nav>
-<button class="btn btn-primary open-button" onclick="openForm()">Vpay</button>
+
 
 <div class="form-popup" id="myForm">
     <form action="/action_page.php" class="form-container">
-    <h1>PAYMENTS</h1>
+        <h1>PAYMENTS</h1>
 
-    <label for="email"><b>Enter Card No.:-</b></label>
-    <input type="number" placeholder="Enter the no. on the card" name="email" required><br>
+        <label for="email"><b>Enter Card No.:-</b></label>
+        <input type="number" placeholder="Enter the no. on the card" name="email" required><br>
 
-    <label for="psw"><b>enter cvv:-</b></label><br>
-    <input type="number" placeholder="Enter CVV" name="psw" maxlength="3" required><br>
+        <label for="psw"><b>enter cvv:-</b></label><br>
+        <input type="number" placeholder="Enter CVV" name="psw" maxlength="3" required><br>
 
-    <label for="psw"><b>Enter Name on the Card:-</b></label>
-    <input type="text" placeholder="Enter name" name="psw"required><br>
+        <label for="psw"><b>Enter Name on the Card:-</b></label>
+        <input type="text" placeholder="Enter name" name="psw"required><br>
 
 
-    <button type="submit" class="btn">PROCCED</button><br>
-    <button type="button" class="btn cancel" onclick="closeForm()">CANCEL</button>
+        <button type="submit" class="btn">PROCCED</button><br>
+        <button type="button" class="btn cancel" onclick="closeForm()">CANCEL</button>
 </div>
-
+<div>
+    <img class="mianimg"src="mainimg.png">
+</div>
 <script>
     function w3_open() {
         document.getElementById("mySidebar").style.display = "block";
