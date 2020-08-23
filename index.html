@@ -1,176 +1,195 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    </head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script>
-    function load(url) {
-    // display loading image here...
-    document.getElementById('loadingImg').visible = true;
-    // request your data...
-    var req = new XMLHttpRequest();
-    req.open("POST", url, true);
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box;
+        font-size: 30px}
 
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            // content is loaded...hide the gif and display the content...
-            if (req.responseText) {
-                document.getElementById('content').innerHTML = req.responseText;
-                document.getElementById('loadingImg').visible = false;
-            }
+        /* Button used to open the contact form - fixed at the bottom of the page */
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
         }
-    };
-    request.send(vars);
-}
-       
-    </script>
-<style>
-      /* Vector */
-.img{
-position: absolute;
-left: 42.45%;
-right: 39.74%;
-top: 3.48%;
-bottom: 73.97%;
 
-background: #2EC4B6;
-transform: matrix(0.99, -0.11, 0.11, 0.99, 0, 0);
-}
-
-.first{
-    margin:10px 40px 10px 40px;
-}
-     .mainimage{
-            position: absolute;
-            width: 660px;
-            height: 521px;
-            left: 99px;
-            top: 205px;
+        .sidebar a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
         }
-    
-    body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
 
-/* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-  background-color: #555;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  opacity: 0.8;
-  position: top;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
-}
+        .sidebar a.active {
+            background-color: firebrick;
+            color: white;
+        }
 
-/* The popup form - hidden by default */
-.form-popup {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-}
+        .sidebar a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
 
-/* Add styles to the form container */
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-}
+        div.content {
+            margin-left: 200px;
+            padding: 1px 16px;
+            height: 1000px;
+        }
 
-/* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
+        .open-button {
+            background-color: #555;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            float: right;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+        }
 
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
+        /* The popup form - hidden by default */
+        .form-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
 
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
 
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
+        /* Full-width input fields */
+        .form-container input[type=text], .form-container input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
 
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-}
-     .mainimg{
-     position: absolute;
-    width: 660px;
-    height: 521px;
-    left: 99px;
-    top: 205px;
-}
-  </style>
-    
-   
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Set a style for the submit/login button */
+        .form-container .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom:10px;
+            opacity: 0.8;
+        }
+
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+            background-color: red;
+        }
+
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+        .content {
+            column-count: 1;
+            column-width: 1000px;
+        }
+        .form-container-c{
+
+        }
+    </style>
+</head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-    <img src="image 1.png" width="80" height="30" class="d-inline-block align-top" alt="" loading="lazy">    
-    <a class="navbar-brand" href="#">  
-    </a>
-  </nav>
-     <button class="btn btn-primary open-button" onclick="openForm()">Vpay</button>
-
-<div class="form-popup" id="myForm">
-  <form action="/action_page.php" class="form-container">
-    <h1>Login</h1>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <button type="submit" class="btn">Login</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-  </form>
+<div class="sidebar">
+    <img src="vpay.jpg" width="200px" height="70px">
+    <a class="active" href="#home">Home</a>
+    <a href="#Pay">Payment Infrastructure</a>
+    <a href="#UP">Unified Platform</a>
+    <a href="#DD">Design for developers</a>
+    <a href="#tools">Tools for stack</a>
+    <a href="#about">Why VITC?</a>
 </div>
 
+<button class="open-button" onclick="openForm()">VPay</button>
+<div class="content">
+<p>
+    <a id="Pay">Payment Infrastructure</a>
+    Payments infrastructure for the internet
+    Millions of businesses of all sizes—from startups to large enterprises—use VITC’s software and APIs to accept payments, send payouts, and manage their businesses online.<br><br><br>
+    <a id="UP">Unified Platform</a>
+    Unified platform
+    A fully integrated suite of payments products.
+    We bring together everything that’s required to build websites and apps that accept payments and send payouts globally. VITC’s products power payments for online and in-person retailers subscriptions businesses software platforms and marketplaces , and everything in between.
+    We also help companies beat fraud send invoices issue virtual and physical cards get financing manage business spend , and much more.<br><br>
+    <a id="DD">Design for Developers</a>
+    Designed for developers
+    We agonize over the right abstractions so your teams don’t need to stitch together disparate systems or spend months integrating payments functionality.<br><br><br>
+    <a id="tools">TOOls for every stack</a>
+    Tools for every stack
+    We offer client and server libraries in everything from React and PHP to .NET and iOS.<br><br>
+    <a id="about">Why VITC?</a>
+    Why VITC
+    A technology-first approach to payments and finance
+    Close to the metal
+    From direct integrations  with card networks and banks to checkout flows in the browser, we operate on and optimize at every level of the financial stack.</p>
+</div>
+<nav class="navbar navbar-light bg-light">
+    <img src="image 1.png" width="80" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    <a class="navbar-brand" href="#">
+    </a>
+</nav>
+<button class="btn btn-primary open-button" onclick="openForm()">Vpay</button>
 
-    <div>
+<div class="form-popup" id="myForm">
+    <form action="/action_page.php" class="form-container">
+        <h1>Login</h1>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <button type="submit" class="btn">Login</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+</div>
+<div>
     <img class="mianimg"src="mainimg.png">
-    
-    
-    
-    </div>
-</body>
+</div>
 <script>
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+    }
 
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
 
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
 </script>
+
+</body>
 </html>
